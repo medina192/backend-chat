@@ -28,10 +28,7 @@ class Server{
     middlewares(){
         this.app.use( express.static( path.resolve( __dirname, '../public') ) );
 
-        this.app.use( cors({
-            origin: 'http://localhost:3000',
-            credentials: true
-        }) );
+        this.app.use( cors() );
         /*
         this.app.use(function(req, res, next) {
             res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
@@ -43,6 +40,10 @@ class Server{
         
         this.app.use( '/api/auth', require('../routes/auth') );
         this.app.use( '/api/messages', require('../routes/messages') );
+
+        this.app.get('*', (req, res) => {
+            res.sendFile( path.resolve( __dirname, '../public/index.html' ) );
+        });
     }
 
     configureSockets(){
