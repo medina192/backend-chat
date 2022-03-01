@@ -15,7 +15,7 @@ class Socket{
         this.io.on("connection", async ( socket ) => {
 
             const [exists, uid] = checkToken(socket.handshake.query.token);
-            
+
             if(!exists)
             {
                 socket.disconnect();
